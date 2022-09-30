@@ -4,7 +4,7 @@ import useGenerateRandomIndexes from "../hooks/useGenerateRandomIndexes";
 
 type PassProps = {
   password: string;
-  onSuccess?: Function;
+  onSuccess: Function;
 };
 
 export default function PasswordInput({ password, onSuccess }: PassProps) {
@@ -22,8 +22,8 @@ export default function PasswordInput({ password, onSuccess }: PassProps) {
       JSON.stringify(specifiedPasswordChars) ===
       JSON.stringify(specifiedInputChars)
     )
-      alert("correct");
-  }, [formInput, indexesToCompare, specifiedPasswordChars]);
+      onSuccess();
+  }, [formInput, indexesToCompare, specifiedPasswordChars, onSuccess]);
 
   console.log(formInput);
   return (
