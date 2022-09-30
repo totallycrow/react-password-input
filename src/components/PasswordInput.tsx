@@ -2,8 +2,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import "./PasswordInput.css";
 import useGenerateRandomIndexes from "../hooks/useGenerateRandomIndexes";
 
-export default function PasswordInput({ password, onSuccess }: any) {
-  const [formInput, setFormInput] = useState([]);
+type PassProps = {
+  password: string;
+  onSuccess?: Function;
+};
+
+export default function PasswordInput({ password, onSuccess }: PassProps) {
+  const [formInput, setFormInput] = useState(Array<string>);
 
   const [indexesToCompare, specifiedPasswordChars, passwordChars] =
     useGenerateRandomIndexes(password);
@@ -29,7 +34,7 @@ export default function PasswordInput({ password, onSuccess }: any) {
       <div>{specifiedPasswordChars}</div>
 
       <div>
-        {passwordChars.map((item: any, index: number) => {
+        {passwordChars.map((item: string, index: number) => {
           if (indexesToCompare.includes(index)) {
             return (
               <input
@@ -52,8 +57,6 @@ export default function PasswordInput({ password, onSuccess }: any) {
               disabled
               onChange={(e) => {
                 const newState = [...formInput];
-
-                // @ts-ignore
                 newState[index] = e.target.value;
                 setFormInput(newState);
               }}

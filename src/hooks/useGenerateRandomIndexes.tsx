@@ -10,25 +10,31 @@ export default function useGenerateRandomIndexes(password: string) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }, []);
 
-  const generateRandomIndexes = useCallback((password: string) => {
-    const maxPassIndex = Math.floor(password.length / 2 - 1);
-    const maxNumberOfHighlights = password.length / 2;
-    const minPassLength = 2;
+  const generateRandomIndexes = useCallback(
+    (password: string) => {
+      const maxPassIndex = Math.floor(password.length - 1);
+      const maxNumberOfHighlights = password.length / 2;
+      const minPassLength = 2;
 
-    const numberOfIndexes = getRandomInt(minPassLength, maxNumberOfHighlights);
+      const numberOfIndexes = getRandomInt(
+        minPassLength,
+        maxNumberOfHighlights
+      );
 
-    let randomIndexes: any = [];
+      let randomIndexes: any = [];
 
-    while (randomIndexes.length < numberOfIndexes) {
-      const randomItem = getRandomInt(0, maxPassIndex);
+      while (randomIndexes.length < numberOfIndexes) {
+        const randomItem = getRandomInt(0, maxPassIndex);
 
-      if (!randomIndexes.includes(randomItem)) {
-        randomIndexes.push(randomItem);
+        if (!randomIndexes.includes(randomItem)) {
+          randomIndexes.push(randomItem);
+        }
       }
-    }
 
-    return randomIndexes;
-  }, []);
+      return randomIndexes;
+    },
+    [getRandomInt]
+  );
 
   const indexesToCompare = useMemo(() => {
     return generateRandomIndexes(password);
