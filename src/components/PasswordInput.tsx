@@ -43,7 +43,6 @@ export default function PasswordInput({ password, onSuccess }: PassProps) {
                 onChange={(e) => {
                   const newState = [...formInput];
 
-                  // @ts-ignore
                   newState[index] = e.target.value;
                   setFormInput(newState);
                 }}
