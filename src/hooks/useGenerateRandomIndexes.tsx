@@ -21,6 +21,8 @@ export default function useGenerateRandomIndexes(password: string) {
         maxNumberOfHighlights
       );
 
+      // ******* ?????? ********
+      // breaks after setting type to Array<number> or any specific type
       let randomIndexes: any = [];
 
       while (randomIndexes.length < numberOfIndexes) {
